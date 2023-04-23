@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище DBDModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="Idd" />
+          </Key>
+          <Property Name="Idd" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Courss" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Semestrr">
+          <Key>
+            <PropertyRef Name="Idd" />
+          </Key>
+          <Property Name="Idd" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Studentt" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Attestaciaa" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Groupaa" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Courss" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Semestrr__Courss__267ABA7A">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="Semestrr" Type="Self.Semestrr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="Idd" />
+            </Principal>
+            <Dependent Role="Semestrr">
+              <PropertyRef Name="Courss" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище DBDModelContainer">
+          <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Semestrr" EntityType="Self.Semestrr" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Semestrr__Courss__267ABA7A" Association="Self.FK__Semestrr__Courss__267ABA7A">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="Semestrr" EntitySet="Semestrr" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="Idd" />
+          </Key>
+          <Property Name="Idd" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Courss" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Semestrr" Relationship="Self.FK__Semestrr__Courss__267ABA7A" FromRole="Course" ToRole="Semestrr" />
+        </EntityType>
+        <EntityType Name="Semestrr">
+          <Key>
+            <PropertyRef Name="Idd" />
+          </Key>
+          <Property Name="Idd" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Studentt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Attestaciaa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Groupaa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Courss" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Course" Relationship="Self.FK__Semestrr__Courss__267ABA7A" FromRole="Semestrr" ToRole="Course" />
+        </EntityType>
+        <Association Name="FK__Semestrr__Courss__267ABA7A">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="Semestrr" Type="Self.Semestrr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="Idd" />
+            </Principal>
+            <Dependent Role="Semestrr">
+              <PropertyRef Name="Courss" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBDEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Course" EntityType="Self.Course" />
+          <EntitySet Name="Semestrr" EntityType="Self.Semestrr" />
+          <AssociationSet Name="FK__Semestrr__Courss__267ABA7A" Association="Self.FK__Semestrr__Courss__267ABA7A">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="Semestrr" EntitySet="Semestrr" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище DBDModelContainer" CdmEntityContainer="DBDEntities">
+          <EntitySetMapping Name="Course">
+            <EntityTypeMapping TypeName="DBDModel.Course">
+              <MappingFragment StoreEntitySet="Course">
+                <ScalarProperty Name="Idd" ColumnName="Idd" />
+                <ScalarProperty Name="Courss" ColumnName="Courss" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Semestrr">
+            <EntityTypeMapping TypeName="DBDModel.Semestrr">
+              <MappingFragment StoreEntitySet="Semestrr">
+                <ScalarProperty Name="Idd" ColumnName="Idd" />
+                <ScalarProperty Name="Studentt" ColumnName="Studentt" />
+                <ScalarProperty Name="Attestaciaa" ColumnName="Attestaciaa" />
+                <ScalarProperty Name="Groupaa" ColumnName="Groupaa" />
+                <ScalarProperty Name="Courss" ColumnName="Courss" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
